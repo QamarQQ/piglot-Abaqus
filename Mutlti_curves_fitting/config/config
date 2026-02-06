@@ -1,0 +1,62 @@
+iters: 50
+objective:
+  composite: true
+  name: fitting
+  parallel: 3
+  references:
+    reference_T124.txt:
+      prediction: reaction_z
+    reference_T23.txt:
+      prediction: reaction_x
+    reference_T95.txt:
+      prediction: reaction_y
+  solver:
+    abaqus_path: C:\SIMULIA\Commands\abaqus.bat
+    cases:
+      case_1:
+        sample_T23.inp:
+          fields:
+            reaction_x:
+              direction: x
+              field: RF
+              name: FieldsOutput
+              set_name: RF_SET
+              x_field: U
+          instance_name: Part-1-1
+          step_name: Step-1
+      case_2:
+        sample_T95.inp:
+          fields:
+            reaction_y:
+              direction: x
+              field: RF
+              name: FieldsOutput
+              set_name: RF_SET
+              x_field: U
+          instance_name: Part-1-1
+          step_name: Step-1
+      case_3:
+        sample_T124.inp:
+          fields:
+            reaction_z:
+              direction: x
+              field: RF
+              name: FieldsOutput
+              set_name: RF_SET
+              x_field: U
+          instance_name: Part-1-1
+          step_name: Step-1
+    extra_args: user=D:\Hohai\Research\piglot\examples\abaqus_slove_fitting_static_umat\Mutlti_curves_fitting\vevp_leonov_model_kr_to_opt_multi.f
+    name: abaqus
+optimiser: botorch
+output: .\config
+parameters:
+  b_vstar:
+  - 0.9
+  - 0.9
+  - 1.5
+  m_vstar:
+  - -0.8
+  - -0.8
+  - -0.5
+quiet: false

@@ -1,0 +1,8 @@
+Iteration: 18
+Function calls: 27
+Best loss: 0.0010719893106832378
+Best parameters:
+	m_vstar: -0.7211456422262759
+	b_vstar: 0.964088167742194
+
+Elapsed time: 3h42m45s

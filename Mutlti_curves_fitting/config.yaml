@@ -1,0 +1,61 @@
+
+iters: 50
+
+optimiser: botorch
+
+
+parameters:
+  m_vstar: [-0.8, -0.8, -0.5]
+  b_vstar: [0.9, 0.9, 1.5]
+  
+objective:
+  name: fitting
+  composite: True
+  solver:
+    name: abaqus
+    # path to the Abaqus executable
+    abaqus_path: C:\SIMULIA\Commands\abaqus.bat
+    extra_args: user=D:\Hohai\Research\piglot\examples\abaqus_slove_fitting_static_umat\Mutlti_curves_fitting\vevp_leonov_model_kr_to_opt_multi.f
+
+    cases:
+      case_1: 
+        'sample_T23.inp':
+          step_name: Step-1 # optional field for this case
+          instance_name: Part-1-1 # optional field for this case
+          fields:
+            'reaction_x':
+              name: FieldsOutput
+              set_name: RF_SET
+              field: RF
+              x_field: U
+              direction: x 
+      case_2: 
+        'sample_T95.inp':
+          step_name: Step-1 # optional field for this case
+          instance_name: Part-1-1 # optional field for this case
+          fields:
+            'reaction_y':
+              name: FieldsOutput
+              set_name: RF_SET
+              field: RF
+              x_field: U
+              direction: x 
+      case_3: 
+        'sample_T124.inp':
+          step_name: Step-1 # optional field for this case
+          instance_name: Part-1-1 # optional field for this case
+          fields:
+            'reaction_z':
+              name: FieldsOutput
+              set_name: RF_SET
+              field: RF
+              x_field: U
+              direction: x 
+  parallel: 3
+  references:
+    'reference_T23.txt':
+      prediction: reaction_x
+    'reference_T95.txt':
+      prediction: reaction_y
+    'reference_T124.txt':
+      prediction: reaction_z
